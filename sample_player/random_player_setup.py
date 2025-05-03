@@ -9,7 +9,7 @@ class RandomPlayer(BasePokerPlayer):  # Do not forget to make parent class as "B
         action = random.choice(valid_actions)["action"]
         if action == "raise":
             action_info = valid_actions[2]
-            amount = random.randint(action_info["amount"]["min"], action_info["amount"]["max"])
+            amount = random.randint(action_info["amount"]["min"], (action_info["amount"]["max"]))
             if amount == -1: action = "call"
         if action == "call":
             action_info = valid_actions[1]

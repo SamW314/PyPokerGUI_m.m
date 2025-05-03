@@ -1,4 +1,5 @@
 import pypokerengine.utils.visualize_utils as U
+from pypokerengine.players import BasePokerPlayer
 
 class ConsolePlayer(BasePokerPlayer):
 

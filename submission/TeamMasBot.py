@@ -48,9 +48,9 @@ class TeamMasBot(BasePokerPlayer):  # Do not forget to make parent class as "Bas
                 hole_card=gen_cards(hole_card),
                 community_card=gen_cards(community_card)
                 )
-        if win_rate >= 1.0 / (self.nb_player + (min(max(20, pot["main"]["amount"]),200)/self.nb_player)):
+        if win_rate >= 1.0 / (self.nb_player + (min(max(20, pot["main"]["amount"]),100)/self.nb_player)):
             # check if we want to raise
-            raise_by = int(1.0 / (self.nb_player + (min(max(20, pot["main"]["amount"]),200)/self.nb_player)) * pot["main"]["amount"])
+            raise_by = int((win_rate) * pot["main"]["amount"])
             if round_state['street']=="preflop":
                 raise_by = raise_by/2
             if raise_by > min_raise and raise_by < max_raise:
@@ -58,7 +58,7 @@ class TeamMasBot(BasePokerPlayer):  # Do not forget to make parent class as "Bas
             elif raise_by > max_raise and max_raise > 0:
                 return "raise", max_raise
             # otherwise, simply call
-            elif (win_rate*pot["main"]["amount"]*10 > valid_actions[1]['amount']):          
+            elif ((win_rate*pot["main"]["amount"]*5 > valid_actions[1]['amount']) or win_rate == 1):          
                 action = valid_actions[1]
         elif valid_actions[1]['amount'] == 0 or (round_state['street']=="river" and valid_actions[1]['amount'] <= (pot["main"]["amount"]/5)):
             action = valid_actions[1]
