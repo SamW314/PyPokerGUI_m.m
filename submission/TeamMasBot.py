@@ -58,7 +58,7 @@ class TeamMasBot(BasePokerPlayer):  # Do not forget to make parent class as "Bas
             # otherwise, simply call
             else:          
                 action = valid_actions[1]
-        elif valid_action[1]['amount'] == 0:
+        elif valid_actions[1]['amount'] == 0 or (round_state['street']=="river" and valid_actions[1]['amount'] <= (pot["main"]["amount"]/5)):
             action = valid_actions[1]
         else:
             # bad hand, fold
